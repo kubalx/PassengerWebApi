@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.13.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Passenger.Core\Passenger.Core\Passenger.Core.csproj" />
+    <ProjectReference Include="..\Passenger.Infrastucture\Passenger.Infrastucture.csproj" />
+  </ItemGroup>
+
+</Project>
