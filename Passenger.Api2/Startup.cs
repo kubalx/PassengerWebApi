@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Passenger.Core.Repositories;
+using Passenger.Infrastucture.Mappers;
 using Passenger.Infrastucture.Repositories;
 using Passenger.Infrastucture.Services;
 using System;
@@ -36,6 +37,7 @@ namespace Passenger.Api2
             });
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepository, InMemoryUserRepository>();
+            services.AddSingleton(AutoMapperConfig.Initialize());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

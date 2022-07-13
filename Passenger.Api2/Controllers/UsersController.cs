@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Passenger.Infrastucture.Commands.Users;
 using Passenger.Infrastucture.DTO;
 using Passenger.Infrastucture.Services;
 using System;
@@ -20,7 +21,11 @@ namespace Passenger.Api2.Controllers
         }
 
         [HttpGet("{email}")]
-        public UserDto Get(string email)
-            => _userService.Get(email);
+        public async Task<UserDto> Get(string email)
+            => await _userService.GetAsync(email);
+
+        [HttpPost("")]
+        public async Task Post([FromBody]CreateUser request)
+            => await _userService.RegisterAsync(request.Email, request.Username, request.Password);
     }
 }
