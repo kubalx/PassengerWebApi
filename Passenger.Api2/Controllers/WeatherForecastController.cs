@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Passenger.Infrastucture.DTO;
+using Passenger.Infrastucture.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,31 +11,16 @@ namespace Passenger.Api2.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class UsersController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
+        private readonly IUserService _userService;
+        public UsersController(IUserService userService)
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
-        private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
-        {
-            _logger = logger;
+            _userService = userService;
         }
 
-        [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
-        {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
-        }
+        [HttpGet("{email}")]
+        public UserDto Get(string email)
+            => _userService.Get(email);
     }
 }
